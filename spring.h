@@ -11,6 +11,8 @@ public:
 public:
     Spring();
     Spring(int bandwich, int cost);
+
+
 };
 
 #endif // SPRING_H
