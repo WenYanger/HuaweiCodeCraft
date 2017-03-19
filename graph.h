@@ -10,15 +10,18 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <algorithm>
 
 
 class Graph
 {
 public:
     std::map<int, std::map<int, std::shared_ptr<Spring>>> MainGraph; //使用字典实现疏松矩阵
+    std::map<int, std::map<int, std::shared_ptr<Spring>>> FlowGraph;
     std::vector<std::shared_ptr<Node>> customerNodes; //记录消费节点对应的普通节点，用于搜索
     int customerNodesSize;
     std::vector<int> minCostNodes; //当前最小成本对应的服务器所在节点id
+    std::vector<int> serverNodes;
     int numberNode; //网络节点数量
     int numberSpring; //网络链路数量
     int numberCustomer; //消费节点数量
@@ -27,7 +30,12 @@ public:
     int costMinimum; //当前最小成本
 
 
-
+    bool initialDijkstraFlag = false;
+    int* S;
+    int* dist;
+    int* prev;
+    int** A;
+    const int MAXINT = 32767;
 
 public:
     Graph();
@@ -40,6 +48,8 @@ public:
 
 private:
     void setServer(int id);
+    void SPFA();
+    void Dijkstra();
 
 };
 
